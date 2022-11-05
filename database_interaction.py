@@ -1,5 +1,7 @@
 from appwrite.client import Client
 from appwrite.services.users import Users
+from appwrite.input_file import InputFile
+from appwrite.services.storage import Storage
 from appwrite.id import ID
 
 client = Client()
@@ -12,9 +14,20 @@ client = Client()
 )
 
 users = Users(client)
+storage = Storage(client)
 
 
-def create_user(name: str, email: str, password: str) -> Users:
+def create_user(name: str, email: str, password: str) -> bytes:
     """Returns a user with a randomly generated ID that is also added to the project
     """
     return users.create_md5_user(name=name, user_id=ID.unique(), email=email, passwword=password)
+
+def create_bucket(name: str) -> bytes:
+    """Returns a bucket with a randomly generated ID that is also added to the project
+    """
+    return storage.create_bucket(ID.unique(), name=name)
+
+def create_file(bucket_id: str, path_to_file: str) -> bytes:
+    """Uploads the given file to the given bucket
+    """
+    return storage.create_file(bucket_id, ID.unique(), InputFile.from_path(path_to_file))
