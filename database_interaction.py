@@ -1,7 +1,8 @@
 from appwrite.client import Client
 from appwrite.services.users import Users
-from appwrite.input_file import InputFile
 from appwrite.services.storage import Storage
+from appwrite.services.databases import Databases
+from appwrite.input_file import InputFile
 from appwrite.id import ID
 
 client = Client()
@@ -15,7 +16,7 @@ client = Client()
 
 users = Users(client)
 storage = Storage(client)
-
+databases = Databases(client)
 
 def create_user(name: str, email: str, password: str) -> bytes:
     """Returns a user with a randomly generated ID that is also added to the project
@@ -31,3 +32,29 @@ def create_file(bucket_id: str, path_to_file: str) -> bytes:
     """Uploads the given file to the given bucket
     """
     return storage.create_file(bucket_id, ID.unique(), InputFile.from_path(path_to_file))
+
+def create_database(name: str) -> bytes:
+    """Returns a database with a randomly generated ID that is also added to the project
+    """
+    return databases.create(ID.unique(), name)
+
+def create_collection(name: str, database_id: str) -> bytes:
+    """Returns a collection with a randomly generated ID that is also added to the project
+    """
+    return databases.create_collection(database_id, ID.unique(), name)
+
+def format_collection(database_id: str, collection_id: str) -> None:
+    """Formats the collection to store JSON documents containing the data for blog entries
+    """
+    databases.create_string_attribute(database_id, collection_id, "name", 36, True)
+    databases.create_string_attribute(database_id, collection_id, "title", 36, True)
+    databases.create_string_attribute(database_id, collection_id, "text", 280, True)
+    databases.create_string_attribute(database_id, collection_id, "date", 11, True)
+    databases.create_float_attribute(database_id, collection_id, "latitude", True)
+    databases.create_float_attribute(database_id, collection_id, "longitude", True)
+    databases.create_string_attribute(database_id, collection_id, "file_path", 280, True)
+
+def create_document(data: str, database_id: str, collection_id: str) -> bytes:
+    """Returns a document with a randomly generated ID that is also added to the project
+    """
+    return databases.create_document(database_id, collection_id, ID.unique(), data)
