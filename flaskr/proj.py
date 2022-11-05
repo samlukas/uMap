@@ -23,5 +23,17 @@ def upload_file():
         f.save('/var/www/uploads/uploaded_file.txt')
 
 
+@app.route('/', methods=['GET', 'POST'])
+def post_info():
+    if request.method == 'POST':
+
+        files = request.form.get('filename')
+        date = request.form.get('date')
+        location = request.form.get('location')
+        entry = request.form.get('words')
+
+    return render_template('okok.html')
+
+
 if __name__ == '__main__':
     app.run()
