@@ -3,15 +3,25 @@ from flask import Flask, request, render_template
 app = Flask(__name__)
 
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+@app.route('/')
+def home():
+    return render_template('okok.html')
 
 
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/entry', methods=['POST', 'GET'])
 def entry():
-    error = None
     if request.method == 'POST':
-        journ_entry = request.form.get("entry")
+        journ_entry = request.form.get('entry')
         return journ_entry
     return render_template('map.html')
+
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        f = request.files['the_file']
+        f.save('/var/www/uploads/uploaded_file.txt')
+
+
+if __name__ == '__main__':
+    app.run()
