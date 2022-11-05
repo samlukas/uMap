@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://kit.fontawesome.com/012c424a63.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <title> uMap </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            div.center {
+                width: 300px;
+                height: 320px;
+                position: absolute;
+                background-color: #c9c9c9;
+                opacity: 0.95;
+                margin-left: 60px;
+                z-index: 1000;
+                display: none;
+                padding: 30px;
+            }
+
+            .sidebar {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #c9c9c9;
+                overflow-x: hidden;
+                transition: 0.5s;
+                opacity: 0.95;
+                overflow: hidden;
+                padding-top: 30px;
+                margin-left: 60px;
+            }
+
+            .search {
+                opacity: 0.85;
+            }
+
+            body {
+                font-family: Helvetica, sans-serif;
+            }
+
+            button {
+                margin: 0;
+                padding: 0;
+                border: none;
+                background: none;
+            }
+
+            nav {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: auto;
+                float: left;
+                padding: 10px;
+                width: 60px;
+                height: 100vh;
+                background: #dadada;
+            }
+
+            ul {
+                list-style-type: none;
+            }
+            li i{
+                padding-top: 30px;
+                padding-bottom: 30px;
+
+            }
+
+            button.apple{
+                display: none;
+            }
+
+            input[type=text] {
+                float: left;
+                padding: 6px;
+                border: none;
+                margin-left: 25px;
+                font-size: 17px;  
+                border: 2px solid rgb(75, 75, 75);
+                border-radius: 4px;  
+            }
+
+            article {
+                float: left;
+                width: calc(100% - 60px);
+                position: fixed;
+                margin-left: 60px;
+                margin-bottom: 0;
+                height: 100vh;
+                background-color: #333;
+            }
+
+            .fa-location-arrow:hover {
+                color: #4287f5;
+            }
+
+            .fa-magnifying-glass:hover {
+                color: #4287f5;
+            }
+
+            .fa-heart:hover {
+                color: #4287f5;
+            }
+
+            .fa-circle-plus:hover {
+                color: #4287f5;
+            }
+
+            .fa-down-left-and-up-right-to-center:hover {
+                color: #4287f5;
+            }
+
+            @media (max-width: 600px) {
+                nav {
+                    width: 100%;
+                    height: 60px;
+                    position: fixed;
+                    bottom: 0;
+                }
+                article {          
+                    display: block;        
+                    width: 100%;
+                    height: calc(100% - 60px);
+                    margin-bottom: 60px;
+                    margin-left: 0;
+                }
+                ul > li{
+                    display: inline-block;
+                }
+                li i{
+                    margin-bottom: 0;
+                    padding-top: 0;
+                    padding-bottom: 0;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                }
+                .sidebar {
+                    width: 100%;
+                    height: 0;
+                    padding-top: 0;
+                    margin-left: 0;
+                    margin-bottom: 60px;
+                    top: calc(100% - 260px)
+                }
+                input[type=text] {
+                    margin-left: 0px;
+                }
+                div.center {
+                    width: 300px;
+                    height: 320px;
+                    margin-left: 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="search" class="sidebar">
+            <form action="/action_page.php">
+                <input type="text" id="where" name="where" placeholder="Search...">
+            </form>
+        </div>
+
+        <div id="saved" class="sidebar">
+        </div>
+
+        <div id="center" class="center">
+            <h1>Create Post</h1><br>
+            <form action="{{url_for("post_info")}}" method="post">
+                <input type="file" id="filename" name="filename">
+                <br><br>
+                <input type="date" id="date" name="date">
+                <br><br>
+                <input type="text" id="location" name="location" placeholder="Location:">
+                <br><br><br>
+                <input type="text" id="words" name="words" placeholder="What's on your mind?">
+                <br><br><br>
+                <input type="submit">
+            </form>
+        </div>
+        
+        <section id="main">
+            <nav>
+                <ul>
+                    <li><button onclick="openNav()"><i class="fa-sharp fa-solid fa-magnifying-glass fa-2xl"></i></button></li>
+                    <li><button><i class="fa-solid fa-location-arrow fa-2xl"></i></button></li>
+                    <li><button onclick="openNav1()"><i class="fa-solid fa-heart fa-2xl"></i></button></li>     
+                    <li><button onclick="upload()"><i class="fa-solid fa-circle-plus fa-2xl"></i></button></li>   
+                    <li><button class="apple" id="apple" onclick="closeNav();closeNav1();"><i class="fa-solid fa-down-left-and-up-right-to-center fa-2xl"></i></button></li>         
+                </ul>
+
+            </nav>
+        </section>
+
+        <article id="banana">
+            <iframe style="position: relative; height: 100%; width: 100%; border:0" loading="lazy" allowfullscreen
+src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJm_0x87g0K4gR93ZadrabHY0&key=AIzaSyDn-sT9kyguhHiXpB6qoFcYhkKIXmoMBrA"></iframe>
+</iframe>
+        </article>
+
+        <script>
+            function closeNav() {
+                if(x.matches){
+                    document.getElementById("search").style.height = "0px";
+                } else {
+                    document.getElementById("search").style.width = "0px";
+                }
+                document.getElementById("apple").style.display = "none";
+                document.getElementById("center").style.display = "none";
+            }
+            function closeNav1() {
+                if(x.matches){
+                    document.getElementById("saved").style.height = "0px";
+                } else {
+                    document.getElementById("saved").style.width = "0px";
+                }
+                document.getElementById("apple").style.display = "none";
+                document.getElementById("center").style.display = "none";
+            }
+            var x = window.matchMedia("(max-width: 600px)")
+            function openNav() {
+                closeNav1()
+                if(x.matches){
+                    document.getElementById("search").style.height = "200px";
+                } else {
+                    document.getElementById("search").style.width = "250px";
+                }
+                document.getElementById("apple").style.display = "initial";
+            }
+            function openNav1() {
+                closeNav()
+                if(x.matches){
+                    document.getElementById("saved").style.height = "200px";
+                } else {
+                    document.getElementById("saved").style.width = "250px";
+                }
+                document.getElementById("apple").style.display = "initial";
+            }
+            function upload() {
+                closeNav1()
+                closeNav()
+                document.getElementById("center").style.display = "block";
+                document.getElementById("apple").style.display = "initial";
+            }
+        </script>
+    </body>
+</html>
