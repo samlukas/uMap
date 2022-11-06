@@ -1,5 +1,6 @@
 import json
 
+
 def create_blog_entry(name: str, title: str, text: str, date: str, latitude: float, longitude: float, file_path: str) -> str:
     """Returns a JSON Document String for a blog entry with the given parameters
     """
