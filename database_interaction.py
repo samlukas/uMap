@@ -18,30 +18,36 @@ users = Users(client)
 storage = Storage(client)
 databases = Databases(client)
 
-def create_user(name: str, email: str, password: str) -> bytes:
+
+def create_user(name: str, email: str, password: str) -> dict:
     """Returns a user with a randomly generated ID that is also added to the project
     """
     return users.create_md5_user(name=name, user_id=ID.unique(), email=email, passwword=password)
 
-def create_bucket(name: str) -> bytes:
+
+def create_bucket(name: str) -> dict:
     """Returns a bucket with a randomly generated ID that is also added to the project
     """
     return storage.create_bucket(ID.unique(), name=name)
 
-def create_file(bucket_id: str, path_to_file: str) -> bytes:
+
+def create_file(bucket_id: str, path_to_file: str) -> dict:
     """Uploads the given file to the given bucket
     """
     return storage.create_file(bucket_id, ID.unique(), InputFile.from_path(path_to_file))
 
-def create_database(name: str) -> bytes:
+
+def create_database(name: str) -> dict:
     """Returns a database with a randomly generated ID that is also added to the project
     """
     return databases.create(ID.unique(), name)
 
-def create_collection(name: str, database_id: str) -> bytes:
+
+def create_collection(name: str, database_id: str) -> dict:
     """Returns a collection with a randomly generated ID that is also added to the project
     """
     return databases.create_collection(database_id, ID.unique(), name)
+
 
 def format_collection(database_id: str, collection_id: str) -> None:
     """Formats the collection to store JSON documents containing the data for blog entries
@@ -54,7 +60,8 @@ def format_collection(database_id: str, collection_id: str) -> None:
     databases.create_float_attribute(database_id, collection_id, "longitude", True)
     databases.create_string_attribute(database_id, collection_id, "file_path", 280, True)
 
-def create_document(data: str, database_id: str, collection_id: str) -> bytes:
+
+def create_document(data: str, database_id: str, collection_id: str) -> dict:
     """Returns a document with a randomly generated ID that is also added to the project
     """
     return databases.create_document(database_id, collection_id, ID.unique(), data)
