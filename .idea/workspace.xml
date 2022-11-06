@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9a441806-10a1-49fc-afb9-5695e8f80fa7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uMap.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uMap.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog_entry.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database_interaction.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskr/blog_entry.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskr/blog_entry.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flaskr/database_interaction.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskr/database_interaction.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flaskr/proj.py" beforeDir="false" afterPath="$PROJECT_DIR$/flaskr/proj.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flaskr/templates/okok.html" beforeDir="false" afterPath="$PROJECT_DIR$/flaskr/templates/okok.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flaskr/venv/bin/Activate.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/flaskr/venv/bin/Activate.ps1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +38,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.proj">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="uMap" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -63,9 +61,6 @@
       <module name="uMap" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/flaskr" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -82,8 +77,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.proj" />
+        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>

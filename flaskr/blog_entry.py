@@ -11,7 +11,7 @@ def create_blog_entry(name: str, title: str, text: str, date: str, latitude: flo
         "text": text,
         "date": date,
         "latitude": latitude,
-        "longitutde": longitude,
+        "longitude": longitude,
         "file_path": file_path  # for images
     }
 
